@@ -1,0 +1,11 @@
+image: gitpod/workspace-full
+
+ports:
+  - port: 5003
+    onOpen: open-preview
+
+tasks:
+  - command: go run .
+  
+  - command: python3 gitpod.py
+    openMode: split-right

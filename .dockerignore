@@ -1,0 +1,23 @@
+README.md
+
+# Git
+.git
+.gitignore
+.github
+
+.gitpod.yml
+gitpod.py
+
+app
+
+# Docker
+docker-compose.yml
+.docker
+Dockerfile
+
+# GitPod
+.gitpod.yml
+gitpod.py
+
+# VSCode
+.vscode
