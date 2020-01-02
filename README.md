@@ -4,6 +4,8 @@
 
 Proof-of-Concept( PoC ) application that returns a name. It is indented to be called by another application that composes a "_Greeting name!_" output. For example for "_Hello world!_" this app would be the one providing the "_world_".
 
+![Architecture diagram](./docs/hello-world.svg)
+
 ## Intended use
 
 The purpose of this application is to be used for microservices tech demos and example implementations of tools.
@@ -15,6 +17,7 @@ For more complex demos see:
 - Microsoft's [eShopOnContainers](https://github.com/dotnet-architecture/eShopOnContainers)
 - Weaveworks' and Container Solutions' [Sock Shop](https://github.com/microservices-demo/microservices-demo)
 - Istio's [BookInfo](https://istio.io/docs/examples/bookinfo/)
+- Kubernetes' [Guestbook](https://kubernetes.io/docs/tutorials/stateless-application/guestbook/)
 
 If you extend this application to do something, please create a Pull Request back with a link to your fork.
 

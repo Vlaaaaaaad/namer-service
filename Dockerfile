@@ -27,7 +27,7 @@ RUN apk add --update --no-cache git ca-certificates tzdata && update-ca-certific
 WORKDIR /build
 
 COPY go.mod .
-# COPY go.sum .
+COPY go.sum .
 RUN go mod download && go mod verify
 
 COPY main.go main.go

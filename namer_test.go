@@ -1,13 +1,15 @@
 package main
 
 import (
+	"encoding/json"
+	"github.com/google/go-cmp/cmp"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 )
 
 func TestNamerHandler(t *testing.T) {
-	req, err := http.NewRequest("GET", "/status/alive", nil)
+	req, err := http.NewRequest("GET", "/", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -22,9 +24,18 @@ func TestNamerHandler(t *testing.T) {
 			status, http.StatusOK)
 	}
 
-	expected := `world`
-	if rr.Body.String() != expected {
-		t.Errorf("handler returned unexpected body: got '%v' want '%v'",
-			rr.Body.String(), expected)
+	want := nameResponse{
+		Name: "world",
+	}
+
+	got := nameResponse{}
+	err = json.NewDecoder(rr.Body).Decode(&got)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// if expected.Status != response.Status {
+	if diff := cmp.Diff(want, got); diff != "" {
+		t.Errorf("readyHandler mismatch (-want +got):\n%s", diff)
 	}
 }
