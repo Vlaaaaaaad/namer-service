@@ -6,8 +6,9 @@ on:
       - '.github/workflows/**'
       - '**.go'
       - go.mod
-      - build/.dockerignore
-      - build/Dockerfile
+      - go.sum
+      - .dockerignore
+      - Dockerfile
 
 jobs:
   GitHub:
