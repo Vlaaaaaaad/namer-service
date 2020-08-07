@@ -6,7 +6,7 @@ on:
       - '.github/workflows/**'
       - '**.go'
       - go.mod
-      - Dockerfile
+      - build/Dockerfile
 
 jobs:
   App:

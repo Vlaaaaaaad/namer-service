@@ -2,7 +2,7 @@ ARG VENDOR
 ARG BUILD_DATE
 ARG GIT_REPO
 ARG VCS_REF
-ARG VERSION
+ARG VERSION=dev
 ARG TITLE="namer-service"
 ARG DESCRIPTION="PoC that returns a name like 'world' for 'Hello world'"
 ARG DOCUMENTATION
@@ -28,11 +28,11 @@ COPY go.mod .
 COPY go.sum .
 RUN go mod download && go mod verify
 
-COPY main.go main.go
-COPY namer.go namer.go
-COPY status.go status.go
+ADD . .
 
-RUN go build -o namer
+RUN go build \
+  -ldflags "-X main.BuildID=${VERSION}" \
+  -o namer ./cmd/namer
 
 WORKDIR /dist
 RUN cp /build/namer ./namer
@@ -50,9 +50,6 @@ LABEL org.opencontainers.image.created="${BUILD_DATE}" \
     org.opencontainers.image.documentation="${DOCUMENTATION}" \
     org.opencontainers.image.authors="${AUTHOR}" \
     org.opencontainers.image.licenses="${LICENSE}"
-
-COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
-COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
 COPY --from=builder /dist/namer /namer
 ENTRYPOINT ["/namer"]
