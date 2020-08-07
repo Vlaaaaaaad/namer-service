@@ -9,7 +9,7 @@ ARG DOCUMENTATION
 ARG AUTHOR
 ARG LICENSE="MIT"
 
-FROM golang:1.14.7-stretch AS builder
+FROM golang:1.14.7-buster AS builder
 LABEL org.opencontainers.image.created="${BUILD_DATE}" \
     org.opencontainers.image.url="${GIT_REPO}" \
     org.opencontainers.image.source="${GIT_REPO}" \
