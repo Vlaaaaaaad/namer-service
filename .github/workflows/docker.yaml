@@ -52,7 +52,7 @@ jobs:
             echo "::set-output name=push_to_dockerhub::true"
           fi
 
-          if [[ -z "${AWS_ACCESS_KEY_ID}" || -z "${AWS_SECRET_ACCESS_KEY}" || -z "${AWS_ECR_URL}"]]; then
+          if [[ -z "${AWS_ACCESS_KEY_ID}" || -z "${AWS_SECRET_ACCESS_KEY}" || -z "${AWS_ECR_URL}" ]]; then
             echo "::set-output name=push_to_aws_ecr::false"
           else
             echo "::set-output name=push_to_aws_ecr::true"
