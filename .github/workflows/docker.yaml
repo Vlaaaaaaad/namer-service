@@ -39,8 +39,14 @@ jobs:
 
       - name: Check for available repositories
         id: push_options
-        #env:
-        #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Uncomment to push to GitHub Package Registry
+        env:
+          # Uncomment to enable pushing
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+          AWS_ACCESS_KEY_ID: ""
+          AWS_SECRET_ACCESS_KEY: ""
+          AWS_ECR_URL: ""
         run: |
           if [[ -z "${GITHUB_TOKEN}" ]]; then
             echo "::set-output name=push_to_github_package_registry::false"
