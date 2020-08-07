@@ -40,6 +40,7 @@ jobs:
       - name: Check for available repositories
         id: push_options
         env:
+          DUMMY: "value"
           # Uncomment to enable pushing
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Set the relevant credentials and uncomment to enable pushing
