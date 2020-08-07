@@ -40,17 +40,6 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@v2
 
-      - name: Set up Go 1.14
-        uses: actions/setup-go@v2
-        with:
-          go-version: '1.14'
-
-      - name: Install dependencies
-        run: |
-          go mod download
-          go mod verify
-          go mod vendor
-
       - name: Run GolangCI-Lint
         uses: reviewdog/action-golangci-lint@master
         with:
