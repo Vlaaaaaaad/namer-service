@@ -37,6 +37,27 @@ jobs:
             --build-arg GIT_REPO=$URL \
             --build-arg DOCUMENTATION=$URL
 
+      - name: Check for available repositories
+        id: push_options
+        run: |
+          if [[ -z "${GITHUB_TOKEN}" ]]; then
+            echo "::set-output name=push_to_github_package_registry::false"
+          else
+            echo "::set-output name=push_to_github_package_registry::true"
+          fi
+
+          if [[ -z "${DOCKERHUB_USERNAME}" || -z "${DOCKERHUB_PASSWORD}" ]]; then
+            echo "::set-output name=push_to_dockerhub::false"
+          else
+            echo "::set-output name=push_to_dockerhub::true"
+          fi
+
+          if [[ -z "${AWS_ACCESS_KEY_ID}" || -z "${AWS_SECRET_ACCESS_KEY}" || -z "${AWS_ECR_URL}"]]; then
+            echo "::set-output name=push_to_aws_ecr::false"
+          else
+            echo "::set-output name=push_to_aws_ecr::true"
+          fi
+
       - name: Login to GitHub Package Repository
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
