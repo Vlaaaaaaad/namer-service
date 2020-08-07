@@ -1,4 +1,4 @@
-module github.com/poc-hello-world/namer-service
+module github.com/vlaaaaaaad/namer-service
 
 go 1.14
 

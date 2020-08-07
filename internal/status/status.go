@@ -1,4 +1,4 @@
-package main
+package status
 
 import (
 	"encoding/json"
@@ -9,7 +9,7 @@ type statusResponse struct {
 	Status string `json:"status"`
 }
 
-func aliveHandler(w http.ResponseWriter, r *http.Request) {
+func AliveHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 
@@ -20,7 +20,7 @@ func aliveHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(status)
 }
 
-func readyHandler(w http.ResponseWriter, r *http.Request) {
+func ReadyHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 
