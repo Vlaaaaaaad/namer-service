@@ -11,6 +11,11 @@ app
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+namer
+main
+
+# Dependencies
+vendor/
 
 # macOS
 .DS_Store
