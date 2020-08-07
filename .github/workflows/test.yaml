@@ -49,6 +49,7 @@ jobs:
         run: |
           go mod download
           go mod verify
+          go mod vendor
 
       - name: Run GolangCI-Lint
         uses: reviewdog/action-golangci-lint@master
