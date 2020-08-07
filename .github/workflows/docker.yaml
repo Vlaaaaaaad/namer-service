@@ -69,7 +69,7 @@ jobs:
             echo "::set-output name=push_to_dockerhub::true"
           fi
 
-          if [[ -z "${AWS_ACCESS_KEY_ID}" || -z "${AWS_SECRET_ACCESS_KEY}" || -z "${AWS_ECR_URL}" ]]; then
+          if [[ -z "${AWS_ACCESS_KEY_ID}" || -z "${AWS_SECRET_ACCESS_KEY}" || -z "${AWS_ECR_REPO_NAME}" ]]; then
             echo "Missing AWS credentials, skipping."
 
             echo "::set-output name=push_to_aws_ecr::false"
@@ -115,11 +115,15 @@ jobs:
           aws-region: us-east-1
       
       - name: Login to ECR
+        id: login-ecr
         if: steps.push_options.outputs.push_to_aws_ecr == 'true'
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Tag and push SHA to ECR
         if: steps.push_options.outputs.push_to_aws_ecr == 'true'
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPO_NAME }}
         run: |
-          docker tag namer-service:latest ${{ secrets.AWS_ECR_URL }}/namer-service:commit-$GITHUB_SHA
-          docker push ${{ secrets.AWS_ECR_URL }}/namer-service:commit-$GITHUB_SHA
+          docker tag namer-service:latest $ECR_REGISTRY/$ECR_REPOSITORY:commit-$GITHUB_SHA
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:commit-$GITHUB_SHA
