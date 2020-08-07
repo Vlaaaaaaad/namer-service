@@ -28,7 +28,6 @@ jobs:
       - name: Build
         run: |
           docker build . \
-            --file build/Dockerfile \
             --tag namer-service:latest \
             --build-arg BUILD_DATE=$(date -u +"%Y-%m-%d") \
             --build-arg VCS_REF=$GITHUB_SHA \
