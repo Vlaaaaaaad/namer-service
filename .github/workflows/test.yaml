@@ -6,6 +6,8 @@ on:
       - '.github/workflows/**'
       - '**.go'
       - go.mod
+      - go.sum
+      - .dockerignore
       - Dockerfile
 
 jobs:
@@ -14,14 +16,12 @@ jobs:
 
     steps:
       - name: Clone repo
-        uses: actions/checkout@master
-        with:
-          fetch-depth: 1
+        uses: actions/checkout@v2
 
-      - name: Set up Go 1.13
-        uses: actions/setup-go@master
+      - name: Set up Go 1.14
+        uses: actions/setup-go@v2
         with:
-          go-version: '1.13'
+          go-version: '1.14'
 
       - name: Install dependencies
         run: |
@@ -30,21 +30,20 @@ jobs:
 
       - name: Run tests
         run: |
-          go test -v
+          go test -v ./internal/namer
+          go test -v ./internal/status
 
   Lint:
     runs-on: ubuntu-latest
 
     steps:
       - name: Clone repo
-        uses: actions/checkout@master
-        with:
-          fetch-depth: 1
+        uses: actions/checkout@v2
 
-      - name: Set up Go 1.13
+      - name: Set up Go 1.14
         uses: actions/setup-go@master
         with:
-          go-version: '1.13'
+          go-version: '1.14'
 
       - name: Run GolangCI-Lint
         uses: reviewdog/action-golangci-lint@master
@@ -57,9 +56,7 @@ jobs:
 
     steps:
       - name: Check out code
-        uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
+        uses: actions/checkout@v2
 
       - name: Run hadolint
         uses: reviewdog/action-hadolint@master

@@ -1,4 +1,4 @@
-package main
+package namer
 
 import (
 	"encoding/json"
@@ -9,7 +9,7 @@ type nameResponse struct {
 	Name string `json:"name"`
 }
 
-func namerHandler(w http.ResponseWriter, r *http.Request) {
+func NamerHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 

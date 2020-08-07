@@ -1,4 +1,4 @@
-package main
+package namer
 
 import (
 	"encoding/json"
@@ -15,7 +15,7 @@ func TestNamerHandler(t *testing.T) {
 	}
 
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(namerHandler)
+	handler := http.HandlerFunc(NamerHandler)
 
 	handler.ServeHTTP(rr, req)
 

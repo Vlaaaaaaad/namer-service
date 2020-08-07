@@ -1,4 +1,4 @@
-package main
+package status
 
 import (
 	"encoding/json"
@@ -15,7 +15,7 @@ func TestAliveHandler(t *testing.T) {
 	}
 
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(aliveHandler)
+	handler := http.HandlerFunc(AliveHandler)
 
 	handler.ServeHTTP(rr, req)
 
@@ -47,7 +47,7 @@ func TestHealthyHandler(t *testing.T) {
 	}
 
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(readyHandler)
+	handler := http.HandlerFunc(ReadyHandler)
 
 	handler.ServeHTTP(rr, req)
 
