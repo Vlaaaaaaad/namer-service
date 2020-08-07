@@ -39,6 +39,8 @@ jobs:
 
       - name: Check for available repositories
         id: push_options
+        #env:
+        #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Uncomment to push to GitHub Package Registry
         run: |
           if [[ -z "${GITHUB_TOKEN}" ]]; then
             echo "::set-output name=push_to_github_package_registry::false"
@@ -94,6 +96,7 @@ jobs:
           aws-region: us-east-1
       
       - name: Login to ECR
+        if: "steps.push_options.push_options.push_to_aws_ecr == true"
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Tag and push SHA to ECR
