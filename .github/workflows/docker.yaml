@@ -11,8 +11,8 @@ on:
       - Dockerfile
 
 jobs:
-  GitHub:
-    name: GitHub Package Registry
+  Build:
+    name: Build and maybe push
     runs-on: ubuntu-latest
 
     steps:
@@ -49,18 +49,24 @@ jobs:
           AWS_ECR_URL: ""
         run: |
           if [[ -z "${GITHUB_TOKEN}" ]]; then
+            echo "Missing GitHub Package Registry credentials, skipping."
+
             echo "::set-output name=push_to_github_package_registry::false"
           else
             echo "::set-output name=push_to_github_package_registry::true"
           fi
 
           if [[ -z "${DOCKERHUB_USERNAME}" || -z "${DOCKERHUB_PASSWORD}" ]]; then
+            echo "Missing DockerHub credentials, skipping."
+
             echo "::set-output name=push_to_dockerhub::false"
           else
             echo "::set-output name=push_to_dockerhub::true"
           fi
 
           if [[ -z "${AWS_ACCESS_KEY_ID}" || -z "${AWS_SECRET_ACCESS_KEY}" || -z "${AWS_ECR_URL}" ]]; then
+            echo "Missing AWS credentials, skipping."
+
             echo "::set-output name=push_to_aws_ecr::false"
           else
             echo "::set-output name=push_to_aws_ecr::true"
