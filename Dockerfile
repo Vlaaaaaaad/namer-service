@@ -9,7 +9,7 @@ ARG DOCUMENTATION
 ARG AUTHOR
 ARG LICENSE="MIT"
 
-FROM golang:1.13-alpine AS builder
+FROM golang:1.14.7-stretch AS builder
 LABEL org.opencontainers.image.created="${BUILD_DATE}" \
     org.opencontainers.image.url="${GIT_REPO}" \
     org.opencontainers.image.source="${GIT_REPO}" \
@@ -40,7 +40,7 @@ WORKDIR /dist
 RUN cp /build/namer ./namer
 
 # FROM scratch AS app fails for some reason
-FROM alpine AS app
+FROM ubuntu:focal-20200720 AS app
 LABEL org.opencontainers.image.created="${BUILD_DATE}" \
     org.opencontainers.image.url="${GIT_REPO}" \
     org.opencontainers.image.source="${GIT_REPO}" \
