@@ -14,7 +14,7 @@ func AliveHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 
 	status := statusResponse{
-		Status: "Greeter service is alive",
+		Status: "Greeter service is alive!",
 	}
 
 	json.NewEncoder(w).Encode(status)
