@@ -5,6 +5,6 @@ ports:
 
 tasks:
   - command: go run .
-  
-  - command: python3 gitpod.py
+
+  - command: python3 assets/gitpod.py
     openMode: split-right
