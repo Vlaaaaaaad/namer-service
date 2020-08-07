@@ -59,20 +59,20 @@ jobs:
           fi
 
       - name: Login to GitHub Package Repository
-        if: outputs.push_options.push_to_github_package_registry == true
+        if: "steps.push_options.push_options.push_to_github_package_registry == true"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           docker login docker.pkg.github.com --username $USER --password $GH_TOKEN
 
       - name: Tag and push SHA
-        if: outputs.push_options.push_to_github_package_registry == true
+        if: "steps.push_options.push_options.push_to_github_package_registry == true"
         run: |
           docker tag namer-service:latest docker.pkg.github.com/$USER/$REPO/namer-service:commit-$GITHUB_SHA
           docker push docker.pkg.github.com/$USER/$REPO/namer-service:commit-$GITHUB_SHA
 
       - name: Login to Dockerhub
-        if: outputs.push_options.push_to_dockerhub == true
+        if: "steps.push_options.push_options.push_to_dockerhub == true"
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
@@ -80,14 +80,14 @@ jobs:
           echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
       
       - name: Tag and push SHA to Dockerhub
-        if: outputs.push_options.push_to_dockerhub == true
+        if: "steps.push_options.push_options.push_to_dockerhub == true"
         run: |
           docker tag namer-service:latest $USER/$REPO:commit-$GITHUB_SHA
           docker push $USER/$REPO:commit-$GITHUB_SHA
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
-        if: outputs.push_options.push_to_aws_ecr == true
+        if: "steps.push_options.push_options.push_to_aws_ecr == true"
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -97,7 +97,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Tag and push SHA to ECR
-        if: outputs.push_options.push_to_aws_ecr == true
+        if: "steps.push_options.push_options.push_to_aws_ecr == true"
         run: |
           docker tag namer-service:latest ${{ secrets.AWS_ECR_URL }}/namer-service:commit-$GITHUB_SHA
           docker push ${{ secrets.AWS_ECR_URL }}/namer-service:commit-$GITHUB_SHA
