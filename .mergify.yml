@@ -1,11 +1,51 @@
 pull_request_rules:
-   - name: automatic merge for Dependabot pull requests
-     conditions:
-       - author~=^dependabot(|-preview)\[bot\]$
-       - status-success=App
-       - status-success=Dockerfile
-       - base=master
-     actions:
-       merge:
-         method: squash
-         strict: true
+  - name: Automatic merge for Dependabot pull requests
+    conditions:
+      - base=main
+      - label!=do-not-merge/hold
+      - author~=^(dependabot(|-preview)\[bot\])$
+      - status-success=Build and maybe push image
+      - status-success=App
+      - status-success=Lint
+      - status-success=Dockerfile
+    actions:
+      merge:
+        strict: smart+fasttrack
+        method: squash
+        commit_message: title+body
+      delete_head_branch:
+        force: false
+
+  - name: Merge code PRs when reviewed
+    conditions:
+      - base=main
+      - label!=do-not-merge/hold
+      - "#changes-requested-reviews-by=0"
+      - "#approved-reviews-by>=1"
+      - status-success=Build and maybe push image
+      - status-success=App
+      - status-success=Lint
+      - status-success=Dockerfile
+    actions:
+      merge:
+        strict: smart+fasttrack
+        method: squash
+        commit_message: title+body
+      delete_head_branch:
+        force: false
+
+  - name: Merge non-code PRs when reviewed
+    conditions:
+      - base=main
+      - label!=do-not-merge/hold
+      - "#changes-requested-reviews-by=0"
+      - "#approved-reviews-by>=1"
+      - "-files~=^(docs/.*|README.md|assets/.*)$"
+      - status-success=Labels
+    actions:
+      merge:
+        strict: smart+fasttrack
+        method: squash
+        commit_message: title+body
+      delete_head_branch:
+        force: false
