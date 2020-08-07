@@ -22,8 +22,6 @@ LABEL org.opencontainers.image.created="${BUILD_DATE}" \
     org.opencontainers.image.authors="${AUTHOR}" \
     org.opencontainers.image.licenses="${LICENSE}"
 
-RUN apk add --update --no-cache git ca-certificates tzdata && update-ca-certificates
-
 WORKDIR /build
 
 COPY go.mod .
