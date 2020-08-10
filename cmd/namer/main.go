@@ -27,7 +27,7 @@ func setServiceHeader(h http.Handler) http.Handler {
 func main() {
 	globalmux := http.NewServeMux()
 
-	globalmux.HandleFunc("/", namer.NamerHandler)
+	globalmux.HandleFunc("/", namer.NameHandler)
 	globalmux.HandleFunc("/status/alive", status.AliveHandler)
 	globalmux.HandleFunc("/status/ready", status.ReadyHandler)
 

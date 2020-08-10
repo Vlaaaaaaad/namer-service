@@ -9,7 +9,8 @@ type nameResponse struct {
 	Name string `json:"name"`
 }
 
-func NamerHandler(w http.ResponseWriter, r *http.Request) {
+// NameHandler is the actual function that returns the name at /
+func NameHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 
