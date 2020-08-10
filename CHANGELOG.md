@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.1.1](https://github.com/vlaaaaaaad/namer-service/tree/v0.1.1) (2020-08-10)
+
+[Full Changelog](https://github.com/vlaaaaaaad/namer-service/compare/v0.1.0...v0.1.1)
+
+Untagged Pull Requests:
+
+- Gitpod enhancements [\#6](https://github.com/Vlaaaaaaad/namer-service/pull/6) ([Vlaaaaaaad](https://github.com/Vlaaaaaaad))
+
 ## [v0.1.0](https://github.com/vlaaaaaaad/namer-service/tree/v0.1.0) (2020-08-07)
 
 [Full Changelog](https://github.com/vlaaaaaaad/namer-service/compare/v0.0.1...v0.1.0)
