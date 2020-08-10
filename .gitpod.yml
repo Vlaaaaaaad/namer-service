@@ -4,7 +4,7 @@ ports:
   - port: 5003
 
 tasks:
-  - command: go run .
+  - command: go run cmd/namer/main.go
 
   - command: python3 assets/gitpod.py
     openMode: split-right
