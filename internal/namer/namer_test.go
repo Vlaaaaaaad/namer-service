@@ -15,7 +15,7 @@ func TestNamerHandler(t *testing.T) {
 	}
 
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(NamerHandler)
+	handler := http.HandlerFunc(NameHandler)
 
 	handler.ServeHTTP(rr, req)
 
