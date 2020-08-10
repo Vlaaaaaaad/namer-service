@@ -4,7 +4,7 @@
 
 Proof-of-Concept( PoC ) application that returns a name. It is indented to be called by another application that composes a "_Greeting name!_" output. For example for "_Hello world!_" this app would be the one providing the "_world_".
 
-![Architecture diagram](./docs/hello-world.svg)
+![Architecture diagram](./assets/hello-world.svg)
 
 ## Intended use
 
